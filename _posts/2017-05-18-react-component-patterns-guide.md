@@ -228,7 +228,7 @@ class Mouse extends React.Component {
     render() {
         return (
             <div 
-                style={{ height: '100vh' }} 
+                style={% raw %}{{ height: '100vh' }}{% endraw %} 
                 onMouseMove={this.handleMouseMove}
             >
                 {this.props.render(this.state)}
@@ -244,7 +244,7 @@ const App = () => (
             <div>
                 <h1>Mouse position: ({x}, {y})</h1>
                 <div 
-                    style={{
+                    style={% raw %}{{
                         position: 'absolute',
                         left: x,
                         top: y,
@@ -252,7 +252,7 @@ const App = () => (
                         height: 20,
                         backgroundColor: 'red',
                         borderRadius: '50%',
-                    }}
+                    }}{% endraw %}
                 />
             </div>
         )}
@@ -509,7 +509,7 @@ class ErrorBoundary extends React.Component {
             return (
                 <div className="error-boundary">
                     <h2>Something went wrong.</h2>
-                    <details style={{ whiteSpace: 'pre-wrap' }}>
+                    <details style={% raw %}{{ whiteSpace: 'pre-wrap' }}{% endraw %}>
                         {this.state.error && this.state.error.toString()}
                         <br />
                         {this.state.errorInfo.componentStack}
@@ -632,10 +632,10 @@ class App extends React.Component {
     
     render() {
         return (
-            <ThemeContext.Provider value={{
+            <ThemeContext.Provider value={% raw %}{{
                 theme: this.state.theme,
                 toggleTheme: this.toggleTheme
-            }}>
+            }}{% endraw %}>
                 <UserContext.Provider value={this.state.user}>
                     <Header />
                     <MainContent />

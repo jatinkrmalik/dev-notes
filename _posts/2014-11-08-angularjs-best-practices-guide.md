@@ -293,8 +293,8 @@ function UserCardController() {
 ```html
 <!-- Use :: for data that won't change -->
 <div ng-repeat="user in vm.users">
-    <h3>{{::user.name}}</h3>
-    <p>{{::user.email}}</p>
+    <h3>{% raw %}{{::user.name}}{% endraw %}</h3>
+    <p>{% raw %}{{::user.email}}{% endraw %}</p>
     <span>{{user.lastLogin}}</span> <!-- This might change -->
 </div>
 ```
