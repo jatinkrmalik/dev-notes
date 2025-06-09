@@ -962,4 +962,18 @@
   @media (max-width: 768px) {
     padding: 0.5rem;
   }
+}
+
+// Home page specific styles
+.home {
+  text-transform: lowercase;
+  
+  // Override text-transform for specific elements that should keep their original case
+  .site-title,
+  .nav-link,
+  code,
+  pre,
+  .tag {
+    text-transform: none;
+  }
 } 

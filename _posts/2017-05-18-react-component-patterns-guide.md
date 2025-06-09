@@ -251,7 +251,7 @@ const App = () => (
                         width: 20,
                         height: 20,
                         backgroundColor: 'red',
-                        borderRadius: '50%'
+                        borderRadius: '50%',
                     }}
                 />
             </div>

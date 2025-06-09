@@ -40,7 +40,7 @@
   {% seo %}
 </head>
 
-<body class="crt-body">
+<body class="crt-body{% if page.url == '/' %} home{% endif %}">
   <div class="power-on-effect"></div>
   <div class="scanlines"></div>
   
@@ -87,7 +87,7 @@
             <a href="https://linkedin.com/in/jatinmalik" target="_blank">LinkedIn</a>
             <a href="https://github.com/jatinmalik" target="_blank">GitHub</a>
           </div>
-          <p>&copy; {{ site.time | date: '%Y' }} {{ site.author | escape }}. Raw dev notes and technical explorations.</p>
+          <p>&copy; {{ site.time | date: '%Y' }} {{ site.author | escape }}</p>
         </footer>
       </div>
     </div>

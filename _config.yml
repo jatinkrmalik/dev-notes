@@ -7,7 +7,7 @@ description: >-
   home lab experiments, and everything in between.
 baseurl: ""
 url: "https://jatinkrmalik.github.io" # Change this to your GitHub Pages URL
-author: "Jatin K Malik"
+author: "@jatinkrmalik"
 
 # Build settings
 markdown: kramdown

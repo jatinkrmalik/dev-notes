@@ -28,10 +28,10 @@
     <div class="copyright">
       <div class="terminal-prompt">
         <span class="prompt-symbol">$</span>
-        <span class="command">echo "© {{ 'now' | date: '%Y' }} {{ site.author | default: 'Terminal User' }}"</span>
+        <span class="command">echo "{{ site.author }} © {{ 'now' | date: '%Y' }}"</span>
       </div>
       <div class="output">
-        © {{ 'now' | date: '%Y' }} {{ site.author | default: 'Terminal User' }}
+        {{ site.author }} © {{ 'now' | date: '%Y' }} 
       </div>
     </div>
   </div>

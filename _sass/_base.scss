@@ -221,11 +221,32 @@ img {
   border-radius: 3px;
 }
 
-// Better link focus states
+// Remove unwanted focus borders and outlines
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+// Better link focus states - only show on keyboard navigation
 a:focus-visible {
   outline: 2px solid var(--text-accent);
   outline-offset: 2px;
   text-decoration: underline;
+}
+
+// Remove focus outline for mouse clicks
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// Remove focus styles for buttons and interactive elements when clicked
+button:focus:not(:focus-visible),
+.post-card-link:focus:not(:focus-visible),
+.nav-link:focus:not(:focus-visible),
+.cta-button:focus:not(:focus-visible),
+.browse-all-btn:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 // Better button and link spacing for readability
