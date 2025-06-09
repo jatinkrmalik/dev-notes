@@ -7,13 +7,6 @@ tags: [mentorship, engineering-management, team-building, technical-leadership, 
 description: "Lessons learned transitioning from individual contributor to engineering leader, and what it really takes to scale technical teams"
 ---
 
-```
-$ ps aux | grep leadership
-jatin     1234  5.2  8.1 mentor_process    --collaborative-thinking
-jatin     1235  3.1  4.2 technical_growth  --diverse-perspectives
-jatin     1236  7.8  6.3 team_scaling      --continuous-learning
-```
-
 Five years ago, I made the transition from Senior Engineer to Principal Engineer, and later into technical leadership roles. The biggest lesson? **Engineering leadership isn't about being the best coder in the room—it's about making everyone else better coders**. Today, I want to share what I've learned about growing engineers, building high-performing teams, and the subtle art of scaling engineering culture.
 
 ## The Mentorship Misconception

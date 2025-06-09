@@ -7,14 +7,6 @@ tags: [scalability, reliability, microservices, system-design]
 description: "Hard-learned lessons about designing distributed systems that gracefully handle failure and scale under pressure"
 ---
 
-```
-$ cat /var/log/distributed-systems/lessons-learned.log
-[2024-12-01 10:00:00] Starting system reliability analysis...
-[2024-12-01 10:00:01] Loading failure patterns from production...
-[2024-12-01 10:00:02] Analyzing cascade failure scenarios...
-[2024-12-01 10:00:03] Compiling resilience patterns...
-```
-
 After a decade of building distributed systems at companies like Uber, Adobe, and now Atlassian, I've learned that **failure is not just inevitable—it's your best teacher**. Today, I want to share some hard-earned lessons about building systems that don't just survive failure, but thrive despite it.
 
 ## The Cascade Failure Incident

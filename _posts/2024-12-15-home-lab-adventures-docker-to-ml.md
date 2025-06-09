@@ -7,19 +7,6 @@ tags: [docker, raspberry-pi, gpu-programming, home-automation, optimization]
 description: "Building a home lab that bridges professional Docker optimization with personal ML experiments, Raspberry Pi projects, and smart home automation"
 ---
 
-```
-$ systemctl status home-lab.service
-● home-lab.service - Jatin's Home Laboratory
-   Loaded: loaded (/etc/systemd/system/home-lab.service; enabled)
-   Active: active (running) since 2024-01-01 00:00:00 CST
-   Uptime: 349 days, 16 hours, 45 minutes
-   
-   ├── docker-optimization-lab.py    [RUNNING]
-   ├── ml-training-cluster.py        [TRAINING: 67% complete]
-   ├── raspberry-pi-openvpn.service  [CONNECTED]
-   └── smart-home-automation.js      [MONITORING: 42 devices]
-```
-
 After spending my days optimizing **Docker containers** for **distributed systems** at Atlassian, I come home to a different kind of lab — one where I can experiment without breaking production, explore **machine learning** without GPU budget constraints, and build networks that would make **The Matrix** proud. Today, I want to share how I've built a home lab that's become my playground for **everything from performance optimization to chai-brewing automation**.
 
 ## The Philosophy: Professional Skills, Personal Projects

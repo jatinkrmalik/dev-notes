@@ -289,4 +289,212 @@
   .phosphor-glow {
     text-shadow: none;
   }
+}
+
+// Optimized CRT Effects with Auto-fade for Legibility
+
+// Modern mode (light theme) overrides - disable all CRT effects
+:root[data-theme="light"] {
+  .crt-screen,
+  .crt-container {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: var(--bg-primary) !important;
+    
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+  
+  .scanlines,
+  .power-on-effect,
+  .phosphor-glow {
+    display: none !important;
+  }
+  
+  // Disable all animations in modern mode
+  * {
+    animation: none !important;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease !important;
+  }
+  
+  // Clean, simple styling for modern mode
+  .animate-typing {
+    animation: none !important;
+    border-right: none !important;
+  }
+  
+  .cursor {
+    display: none !important;
+  }
+  
+  .click-ripple {
+    box-shadow: none !important;
+  }
+}
+
+// Retro mode (dark theme) - keep CRT effects
+:root[data-theme="dark"] {
+  // CRT Screen Base Styling
+  .crt-screen {
+    position: relative;
+    background: var(--bg-primary);
+    border: 3px solid var(--border-color);
+    border-radius: 15px;
+    box-shadow: 
+      0 0 30px rgba(0, 255, 0, 0.4),
+      inset 0 0 120px rgba(0, 255, 0, 0.05),
+      inset 0 0 15px rgba(0, 255, 0, 0.2);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      background: var(--screen-glow);
+      border-radius: 18px;
+      z-index: -1;
+      opacity: 0.6;
+    }
+  }
+
+  // Optimized Scanlines with Auto-fade
+  .scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      var(--scan-line-color) 2px,
+      var(--scan-line-color) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.15;
+    transition: opacity 2s ease-in-out;
+    
+    // Auto-fade after 3 seconds
+    &.fade-out {
+      opacity: 0.03;
+    }
+  }
+
+  // Simplified Power-on Effect
+  .power-on-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, var(--bg-primary) 80%);
+    z-index: 2000;
+    animation: powerOn 1.5s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes powerOn {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(50);
+      opacity: 0;
+    }
+  }
+
+  // Minimal Click Ripple
+  .click-ripple {
+    position: relative;
+    overflow: hidden;
+    
+    &.ripple-active {
+      box-shadow: 0 0 20px var(--glow-color);
+    }
+  }
+
+  // Subtle Phosphor Glow (Opt-in only)
+  .phosphor-glow {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      text-shadow: var(--glow-text);
+    }
+  }
+
+  // Terminal Cursor
+  .cursor {
+    display: inline-block;
+    background-color: var(--text-primary);
+    width: 10px;
+    height: 1.2em;
+    animation: blink 1.2s step-start infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  // Typing Animation (Opt-in with .animate-typing class)
+  .typing-effect.animate-typing {
+    overflow: hidden;
+    border-right: 2px solid var(--text-primary);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--text-primary); }
+  }
+}
+
+// High Contrast Mode Support
+@media (prefers-contrast: high) {
+  .scanlines {
+    display: none !important;
+  }
+  
+  .power-on-effect {
+    display: none !important;
+  }
+  
+  .crt-screen {
+    border: 2px solid var(--text-primary) !important;
+    box-shadow: none !important;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  .scanlines,
+  .power-on-effect,
+  .typing-effect,
+  .cursor {
+    display: none !important;
+  }
+  
+  .crt-screen {
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2) !important;
+  }
+  
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 } 

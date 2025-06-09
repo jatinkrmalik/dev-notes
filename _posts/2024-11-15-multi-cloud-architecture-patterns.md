@@ -7,15 +7,6 @@ tags: [aws, gcp, azure, multi-cloud, devops, compliance]
 description: "Practical strategies for building truly cloud-agnostic systems that leverage the best of AWS, GCP, and Azure"
 ---
 
-```
-$ terraform plan --target=multi_cloud_infrastructure
-Planning multi-cloud deployment...
-├── AWS: us-west-2, eu-west-1
-├── GCP: us-central1, europe-west1  
-├── Azure: West US 2, West Europe
-└── Estimated monthly cost: $47,832
-```
-
 Three years into our multi-cloud journey at Atlassian, I can confidently say that **multi-cloud is not about avoiding vendor lock-in—it's about choosing the right tool for each job**. Today, I want to share the architectural patterns that actually work when you're serious about running production workloads across AWS, GCP, and Azure.
 
 ## Why Multi-Cloud? (It's Not What You Think)

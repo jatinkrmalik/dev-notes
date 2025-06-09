@@ -29,6 +29,14 @@
   <!-- Legacy Favicon -->
   <link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}">
   
+  <!-- Immediate theme detection to prevent FOUC -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+  
   {% seo %}
 </head>
 
@@ -40,7 +48,9 @@
     <div class="crt-content">
       <div class="main-container">
         <header class="site-header">
-          <h1 class="site-title">Jatin's Dev Notes</h1>
+          <h1 class="site-title">
+            <a href="{{ '/' | relative_url }}" class="site-title-link">Jatin's Dev Notes</a>
+          </h1>
         </header>
 
         <nav class="directory-listing">
@@ -52,21 +62,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ '/posts/' | relative_url }}" class="nav-link {% if page.url contains '/posts' %}active{% endif %}">
-                <span class="file-type">[DIR]</span>
-                <span class="file-name">posts</span>
+              <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' %}active{% endif %}">
+                <span class="file-type">[LOG]</span>
+                <span class="file-name">archive</span>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about' %}active{% endif %}">
                 <span class="file-type">[MD]</span>
                 <span class="file-name">about</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' %}active{% endif %}">
-                <span class="file-type">[LOG]</span>
-                <span class="file-name">archive</span>
               </a>
             </li>
           </ul>

@@ -21,7 +21,39 @@
       // Update current theme display
       const themeDisplay = document.getElementById('current-theme');
       if (themeDisplay) {
-        themeDisplay.textContent = theme === 'dark' ? 'Dark' : 'Light';
+        themeDisplay.textContent = theme === 'dark' ? 'Retro' : 'Modern';
+      }
+      
+      // Disable/enable animations based on theme
+      this.handleThemeSpecificFeatures(theme);
+    },
+
+    handleThemeSpecificFeatures(theme) {
+      const body = document.body;
+      
+      if (theme === 'light') {
+        // Modern mode: disable all CRT effects and animations
+        body.classList.add('modern-mode');
+        body.classList.remove('retro-mode');
+        
+        // Hide/disable CRT specific elements
+        const scanlines = document.querySelector('.scanlines');
+        const powerOnEffect = document.querySelector('.power-on-effect');
+        
+        if (scanlines) scanlines.style.display = 'none';
+        if (powerOnEffect) powerOnEffect.style.display = 'none';
+        
+      } else {
+        // Retro mode: enable CRT effects
+        body.classList.add('retro-mode');
+        body.classList.remove('modern-mode');
+        
+        // Show CRT specific elements
+        const scanlines = document.querySelector('.scanlines');
+        const powerOnEffect = document.querySelector('.power-on-effect');
+        
+        if (scanlines) scanlines.style.display = 'block';
+        if (powerOnEffect) powerOnEffect.style.display = 'block';
       }
     },
 
@@ -39,11 +71,12 @@
     }
   };
 
-  // Minimal Typing Effect (Optional)
+  // Minimal Typing Effect (Only for Retro mode)
   const TypingEffect = {
     init() {
-      // Only animate if user hasn't disabled animations
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Only animate if user hasn't disabled animations AND we're in retro mode
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 
+          document.documentElement.getAttribute('data-theme') === 'dark') {
         this.elements = document.querySelectorAll('.typing-effect.animate-typing');
         this.startTyping();
       }
@@ -66,7 +99,7 @@
         element.textContent += text.charAt(index);
         setTimeout(() => {
           this.typeText(element, text, index + 1);
-        }, 80 + Math.random() * 40); // Slightly faster typing
+        }, 80 + Math.random() * 40);
       } else {
         // Remove cursor after typing is complete
         setTimeout(() => {
@@ -76,32 +109,35 @@
     }
   };
 
-  // Minimal CRT Effects
+  // CRT Effects (Only for Retro mode)
   const CRTEffects = {
     init() {
-      this.powerOnEffect();
-      this.setupScanlineFadeOut();
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      
+      if (currentTheme === 'dark') {
+        this.powerOnEffect();
+        this.setupScanlineFadeOut();
+        this.updateUptime();
+      }
+      
       this.addSubtleInteractivity();
-      this.updateUptime();
     },
 
     powerOnEffect() {
       const powerOnElement = document.querySelector('.power-on-effect');
       if (powerOnElement) {
-        // Remove power-on effect after animation
         setTimeout(() => {
           powerOnElement.style.display = 'none';
-        }, 1500); // Faster removal
+        }, 1500);
       }
     },
 
     setupScanlineFadeOut() {
-      // Fade out scanlines after page load for better readability
       const scanlines = document.querySelector('.scanlines');
       if (scanlines) {
         setTimeout(() => {
           scanlines.classList.add('fade-out');
-        }, 3000); // Wait 3 seconds after page load
+        }, 3000);
       }
     },
 
@@ -110,7 +146,6 @@
       const interactiveElements = document.querySelectorAll('a, button, .nav-link');
       
       interactiveElements.forEach(element => {
-        // Remove phosphor glow, use subtle highlighting instead
         element.addEventListener('mouseenter', () => {
           element.style.transition = 'color 0.2s ease';
         });
@@ -139,14 +174,13 @@
     }
   };
 
-  // Clean Click Effects
+  // Clean Click Effects (Adaptive based on theme)
   const ClickEffects = {
     init() {
       this.addClickRipple();
     },
 
     addClickRipple() {
-      // Add subtle ripple effect to clickable elements
       const clickableElements = document.querySelectorAll('a, button, .nav-link, .terminal-btn');
       
       clickableElements.forEach(element => {
@@ -157,8 +191,9 @@
     },
 
     createRipple(event, element) {
-      // Only add ripple if reduced motion is not preferred
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Only add ripple if reduced motion is not preferred AND we're in retro mode
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+          document.documentElement.getAttribute('data-theme') === 'light') {
         return;
       }
 
@@ -171,12 +206,14 @@
     }
   };
 
-  // Terminal Cursor (Simplified)
+  // Terminal Cursor (Only for Retro mode)
   const TerminalCursor = {
     init() {
       this.cursors = document.querySelectorAll('.cursor');
-      // Only animate if reduced motion is not preferred
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      
+      // Only animate if reduced motion is not preferred AND we're in retro mode
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 
+          document.documentElement.getAttribute('data-theme') === 'dark') {
         this.startBlinking();
       }
     },
@@ -185,7 +222,7 @@
       this.cursors.forEach(cursor => {
         setInterval(() => {
           cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-        }, 600); // Slightly slower blink
+        }, 600);
       });
     }
   };
@@ -204,8 +241,9 @@
           ThemeManager.toggleTheme();
         }
         
-        // Ctrl+Shift+S to toggle scanlines
-        if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+        // Ctrl+Shift+S to toggle scanlines (only in retro mode)
+        if (e.ctrlKey && e.shiftKey && e.key === 'S' && 
+            document.documentElement.getAttribute('data-theme') === 'dark') {
           e.preventDefault();
           this.toggleScanlines();
         }
@@ -250,14 +288,14 @@
       
       debugDiv.innerHTML = `
         <div><strong>Debug Info</strong></div>
-        <div>Theme: ${ThemeManager.currentTheme}</div>
+        <div>Theme: ${ThemeManager.currentTheme === 'dark' ? 'Retro' : 'Modern'}</div>
         <div>Reduced Motion: ${window.matchMedia('(prefers-reduced-motion: reduce)').matches}</div>
         <div>Screen: ${screen.width}x${screen.height}</div>
         <div>Viewport: ${window.innerWidth}x${window.innerHeight}</div>
         <div>Timestamp: ${new Date().toLocaleTimeString()}</div>
         <div style="margin-top: 0.5rem; font-size: 0.7rem;">
           <div>Ctrl+Shift+T: Toggle theme</div>
-          <div>Ctrl+Shift+S: Toggle scanlines</div>
+          ${ThemeManager.currentTheme === 'dark' ? '<div>Ctrl+Shift+S: Toggle scanlines</div>' : ''}
         </div>
       `;
       
@@ -289,12 +327,10 @@
     },
 
     monitorPerformance() {
-      // Monitor page load performance
       window.addEventListener('load', () => {
         const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-        console.log(`⚡ Terminal Blog loaded in ${loadTime}ms`);
+        console.log(`⚡ Dev Notes Blog loaded in ${loadTime}ms`);
         
-        // Add performance info to debug panel
         setTimeout(() => {
           const debugInfo = document.getElementById('debug-info');
           if (debugInfo) {
@@ -316,7 +352,6 @@
     },
 
     setupFocusManagement() {
-      // Ensure proper focus management for keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
           document.body.classList.add('keyboard-navigation');
@@ -329,13 +364,11 @@
     },
 
     setupReducedMotionHandling() {
-      // Respect user's motion preferences
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       
       const handleMotionChange = (e) => {
         if (e.matches) {
           document.body.classList.add('reduced-motion');
-          // Hide scanlines completely for reduced motion users
           const scanlines = document.querySelector('.scanlines');
           if (scanlines) {
             scanlines.style.display = 'none';
@@ -352,7 +385,7 @@
 
   // Initialize everything when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('🖥️  Initializing Minimal Terminal Blog...');
+    console.log('🖥️  Initializing Dev Notes Blog...');
     
     ThemeManager.init();
     CRTEffects.init();
@@ -363,12 +396,13 @@
     PerformanceMonitor.init();
     AccessibilityHelper.init();
     
-    // Only init typing effect if not reduced motion
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Only init typing effect if not reduced motion AND retro mode
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 
+        document.documentElement.getAttribute('data-theme') === 'dark') {
       TypingEffect.init();
     }
     
-    console.log('✅ Terminal Blog ready - optimized for legibility');
+    console.log('✅ Dev Notes Blog ready - adaptive theming enabled');
   });
 
 })(); 

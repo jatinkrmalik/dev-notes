@@ -3,7 +3,6 @@ layout: default
 ---
 
 <div class="welcome-section">
-  <h1>Digital Lab Notebook</h1>
   <div class="intro-text">
     Raw technical explorations from a Principal Engineer at Atlassian. Unpolished thoughts on distributed systems, cloud architecture, home lab experiments, and everything in between. This is where I document discoveries, failures, and random engineering insights.
   </div>
@@ -29,6 +28,7 @@ layout: default
       
       <div class="post-meta">
         <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+        <span class="meta-separator"> • </span>
         <span class="read-time">{{ post.content | number_of_words | divided_by: 200 }} min read</span>
       </div>
       
@@ -49,7 +49,7 @@ layout: default
   
   {% if site.posts.size > 5 %}
   <div style="text-align: center; margin-top: 2rem;">
-    <a href="{{ '/posts/' | relative_url }}" class="terminal-btn">Browse All {{ site.posts.size }} Notes</a>
+    <a href="{{ '/archive/' | relative_url }}" class="terminal-btn">Browse All {{ site.posts.size }} Notes</a>
   </div>
   {% endif %}
 </div>

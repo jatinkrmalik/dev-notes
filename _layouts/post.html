@@ -14,9 +14,12 @@ layout: default
     
     <div class="post-meta">
       <div class="file-info">
+        <span class="file-date">{{ page.date | date: "%B %d, %Y" }}</span>
+        <span class="meta-separator"> • </span>
+        <span class="read-time">{{ content | number_of_words | divided_by: 200 }} min read</span>
+        <span class="meta-separator"> • </span>
         <span class="file-size">{{ content | size }} bytes</span>
-        <span class="file-date">{{ page.date | date: "%Y-%m-%d %H:%M" }}</span>
-        {% if page.author %}<span class="file-owner">{{ page.author }}</span>{% endif %}
+        {% if page.author %}<span class="meta-separator"> • </span><span class="file-owner">{{ page.author }}</span>{% endif %}
       </div>
       
       {% if page.categories.size > 0 %}
