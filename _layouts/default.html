@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}" data-theme="dark">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +32,7 @@
   <!-- Immediate theme detection to prevent FOUC -->
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
     })();
   </script>
@@ -87,13 +87,14 @@
             <a href="https://linkedin.com/in/jatinmalik" target="_blank">LinkedIn</a>
             <a href="https://github.com/jatinmalik" target="_blank">GitHub</a>
           </div>
-          <p>&copy; {{ site.time | date: '%Y' }} {{ site.author | escape }}</p>
+          <p>&copy; {{ site.time | date: '%Y' }} <button id="retro-mode-toggle" class="easter-egg-bolt" title="🕹️ Activate Retro Mode">⚡</button> {{ site.author | escape }}</p>
         </footer>
       </div>
     </div>
   </div>
 
-  {%- include theme-toggle.html -%}
+  <!-- Toast notification container -->
+  <div id="toast-container" class="toast-container"></div>
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 

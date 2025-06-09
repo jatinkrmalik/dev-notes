@@ -6,8 +6,8 @@
   // Theme Management
   const ThemeManager = {
     init() {
-      this.themeToggle = document.getElementById('theme-toggle-btn');
-      this.currentTheme = localStorage.getItem('theme') || 'dark';
+      this.easterEggToggle = document.getElementById('retro-mode-toggle');
+      this.currentTheme = localStorage.getItem('theme') || 'light';
       
       this.setTheme(this.currentTheme);
       this.bindEvents();
@@ -60,14 +60,74 @@
     toggleTheme() {
       const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
       this.setTheme(newTheme);
+      
+      // Show easter egg toast when entering retro mode
+      if (newTheme === 'dark') {
+        ToastManager.showEasterEggToast();
+      }
     },
 
     bindEvents() {
-      if (this.themeToggle) {
-        this.themeToggle.addEventListener('click', () => {
+      if (this.easterEggToggle) {
+        this.easterEggToggle.addEventListener('click', () => {
           this.toggleTheme();
         });
       }
+    }
+  };
+
+  // Toast Notification Manager
+  const ToastManager = {
+    init() {
+      this.container = document.getElementById('toast-container');
+    },
+
+    showEasterEggToast() {
+      this.showToast({
+        icon: '🎉',
+        title: 'Easter Egg Found!',
+        message: 'Welcome to retro mode! You\'ve discovered the terminal CRT experience. Enjoy the authentic 80s computing vibes!',
+        duration: 6000
+      });
+    },
+
+    showToast({ icon, title, message, duration = 4000 }) {
+      if (!this.container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      
+      toast.innerHTML = `
+        <button class="toast-close" aria-label="Close notification">&times;</button>
+        <div class="toast-header">
+          <span class="toast-icon">${icon}</span>
+          <span>${title}</span>
+        </div>
+        <div class="toast-message">${message}</div>
+      `;
+
+      // Add to container
+      this.container.appendChild(toast);
+
+      // Add close functionality
+      const closeBtn = toast.querySelector('.toast-close');
+      closeBtn.addEventListener('click', () => {
+        this.hideToast(toast);
+      });
+
+      // Auto-hide after duration
+      setTimeout(() => {
+        this.hideToast(toast);
+      }, duration);
+    },
+
+    hideToast(toast) {
+      toast.classList.add('toast-hiding');
+      setTimeout(() => {
+        if (toast.parentNode) {
+          toast.parentNode.removeChild(toast);
+        }
+      }, 500);
     }
   };
 
@@ -388,6 +448,7 @@
     console.log('🖥️  Initializing Dev Notes Blog...');
     
     ThemeManager.init();
+    ToastManager.init();
     CRTEffects.init();
     ClickEffects.init();
     TerminalCursor.init();

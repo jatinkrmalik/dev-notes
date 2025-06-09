@@ -1,22 +1,7 @@
 // Theme Variables
 
-// Retro Theme (Dark CRT Terminal)
-:root[data-theme="dark"] {
-  --bg-primary: #000000;
-  --bg-secondary: #0a0a0a;
-  --text-primary: #00ff00;
-  --text-secondary: #00cc00;
-  --text-accent: #00ff41;
-  --text-dim: #008800;
-  --border-color: #00ff00;
-  --glow-color: #00ff00;
-  --glow-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
-  --glow-text: 0 0 5px #00ff00, 0 0 10px #00ff00;
-  --scan-line-color: rgba(0, 255, 0, 0.1);
-  --screen-glow: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
-}
-
-// Modern Theme (Clean Black on White)
+// Modern Theme (Clean, Default)
+:root, 
 :root[data-theme="light"] {
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
@@ -30,6 +15,22 @@
   --glow-text: none;
   --scan-line-color: transparent;
   --screen-glow: none;
+}
+
+// Retro Theme (Easter Egg CRT Terminal)
+:root[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --text-primary: #00ff00;
+  --text-secondary: #00cc00;
+  --text-accent: #00ff41;
+  --text-dim: #008800;
+  --border-color: #00ff00;
+  --glow-color: #00ff00;
+  --glow-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+  --glow-text: 0 0 5px #00ff00, 0 0 10px #00ff00;
+  --scan-line-color: rgba(0, 255, 0, 0.1);
+  --screen-glow: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
 }
 
 // Theme transition
@@ -71,45 +72,47 @@ a {
   color: var(--bg-primary);
 }
 
-// Modern mode specific overrides
+// Modern mode default styling (clean and minimal)
+:root,
 :root[data-theme="light"] {
   
-  // Remove all CRT effects in modern mode
-  .crt-screen {
-    border-radius: 0;
-    box-shadow: none;
-    
-    &::before {
-      display: none;
-    }
-  }
-  
-  .scanlines {
-    display: none;
-  }
-  
-  .power-on-effect {
-    display: none;
-  }
-  
-  // Clean typography for modern mode
+  // Clean modern font
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
   
-  // Simple button styles
-  .terminal-btn {
+  // Remove all CRT effects in modern mode
+  .crt-screen {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: var(--bg-primary) !important;
+    
+    &::before {
+      display: none !important;
+    }
+  }
+  
+  .scanlines,
+  .power-on-effect {
+    display: none !important;
+  }
+  
+  // Modern button styles
+  .terminal-btn, .browse-all-btn, .cta-button {
     background: var(--text-accent);
     color: var(--bg-primary);
     border: none;
     border-radius: 6px;
     padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
     
     &:hover {
       background: var(--text-primary);
       color: var(--bg-primary);
-      box-shadow: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       text-shadow: none;
+      transform: translateY(-1px);
     }
   }
   
@@ -130,19 +133,20 @@ a {
         .file-type {
           background: var(--text-accent);
           color: var(--bg-primary);
+          border-radius: 4px;
         }
       }
     }
   }
   
-  // Clean post styling
+  // Modern post card styling
   .post-card-link {
     &:hover {
       transform: translateY(-2px);
       
       .post-item {
         border-color: var(--text-accent);
-        box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
       
       .post-title {
@@ -154,14 +158,10 @@ a {
   .post-item {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-  }
-  
-  // Remove phosphor glow effects
-  .phosphor-glow {
-    text-shadow: none;
+    background: var(--bg-primary);
     
-    &:hover {
-      text-shadow: none;
+    &::before {
+      display: none; // Remove retro gradient top border
     }
   }
   
@@ -178,5 +178,93 @@ a {
       border-color: var(--text-accent);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
+  }
+  
+  // Remove all retro effects
+  .phosphor-glow {
+    text-shadow: none !important;
+    
+    &:hover {
+      text-shadow: none !important;
+    }
+  }
+  
+  // Modern CTA section
+  .cta-section {
+    background: linear-gradient(135deg, rgba(25, 135, 84, 0.08), rgba(25, 135, 84, 0.03));
+    border: 1px solid rgba(25, 135, 84, 0.3);
+    
+    &::before {
+      background: linear-gradient(90deg, transparent, var(--text-accent), transparent);
+    }
+  }
+} 
+
+// Retro mode specific enhancements (Easter Egg Experience)
+:root[data-theme="dark"] {
+  
+  // Terminal font for authentic experience
+  body {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  }
+  
+  // Enhanced CRT effects for easter egg mode
+  .crt-screen {
+    border: 3px solid var(--border-color);
+    border-radius: 15px;
+    box-shadow: 
+      0 0 30px rgba(0, 255, 0, 0.4),
+      inset 0 0 120px rgba(0, 255, 0, 0.05),
+      inset 0 0 15px rgba(0, 255, 0, 0.2);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      background: var(--screen-glow);
+      border-radius: 18px;
+      z-index: -1;
+      opacity: 0.6;
+    }
+  }
+  
+  // Enable all retro effects
+  .scanlines {
+    display: block !important;
+  }
+  
+  .power-on-effect {
+    display: block !important;
+  }
+  
+  // Retro button styling
+  .terminal-btn, .browse-all-btn, .cta-button {
+    background: transparent;
+    border: 2px solid var(--text-accent);
+    color: var(--text-accent);
+    
+    &:hover {
+      background: var(--text-accent);
+      color: var(--bg-primary);
+      box-shadow: var(--glow-shadow);
+      text-shadow: none;
+    }
+  }
+  
+  // Enhance retro post cards
+  .post-item {
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+  
+  // Glowing text effects
+  .site-title,
+  .post-title,
+  h1, h2, h3 {
+    text-shadow: var(--glow-text);
   }
 } 
