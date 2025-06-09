@@ -33,26 +33,64 @@
 </head>
 
 <body class="crt-body">
+  <div class="power-on-effect"></div>
+  <div class="scanlines"></div>
+  
   <div class="crt-screen">
     <div class="crt-content">
-      {% include header.html %}
-      
-      <main class="main-content" aria-label="Content">
-        <div class="terminal-wrapper">
+      <div class="main-container">
+        <header class="site-header">
+          <h1 class="site-title">Jatin's Dev Notes</h1>
+        </header>
+
+        <nav class="directory-listing">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">
+                <span class="file-type">[DIR]</span>
+                <span class="file-name">home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ '/posts/' | relative_url }}" class="nav-link {% if page.url contains '/posts' %}active{% endif %}">
+                <span class="file-type">[DIR]</span>
+                <span class="file-name">posts</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about' %}active{% endif %}">
+                <span class="file-type">[MD]</span>
+                <span class="file-name">about</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' %}active{% endif %}">
+                <span class="file-type">[LOG]</span>
+                <span class="file-name">archive</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <main class="main-content" role="main">
           {{ content }}
-        </div>
-      </main>
-      
-      {% include footer.html %}
+        </main>
+
+        <footer class="site-footer">
+          <div class="footer-links">
+            <a href="https://j47.in" target="_blank">Portfolio</a>
+            <a href="https://jatinkrmalik.com" target="_blank">Personal Site</a>
+            <a href="https://linkedin.com/in/jatinmalik" target="_blank">LinkedIn</a>
+            <a href="https://github.com/jatinmalik" target="_blank">GitHub</a>
+          </div>
+          <p>&copy; {{ site.time | date: '%Y' }} {{ site.author | escape }}. Raw dev notes and technical explorations.</p>
+        </footer>
+      </div>
     </div>
-    
-    <!-- CRT scan lines overlay -->
-    <div class="scanlines"></div>
-    
-    <!-- Power-on flicker effect -->
-    <div class="power-on-effect"></div>
   </div>
-  
+
+  {%- include theme-toggle.html -%}
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
+
 </html> 

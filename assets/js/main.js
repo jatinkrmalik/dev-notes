@@ -1,4 +1,4 @@
-// Main JavaScript for Terminal Blog
+// Minimal Terminal Blog JavaScript - Optimized for Legibility
 
 (function() {
   'use strict';
@@ -17,6 +17,12 @@
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
       this.currentTheme = theme;
+      
+      // Update current theme display
+      const themeDisplay = document.getElementById('current-theme');
+      if (themeDisplay) {
+        themeDisplay.textContent = theme === 'dark' ? 'Dark' : 'Light';
+      }
     },
 
     toggleTheme() {
@@ -33,11 +39,14 @@
     }
   };
 
-  // Typing Effect
+  // Minimal Typing Effect (Optional)
   const TypingEffect = {
     init() {
-      this.elements = document.querySelectorAll('.typing-effect');
-      this.startTyping();
+      // Only animate if user hasn't disabled animations
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        this.elements = document.querySelectorAll('.typing-effect.animate-typing');
+        this.startTyping();
+      }
     },
 
     startTyping() {
@@ -57,7 +66,7 @@
         element.textContent += text.charAt(index);
         setTimeout(() => {
           this.typeText(element, text, index + 1);
-        }, 50 + Math.random() * 100);
+        }, 80 + Math.random() * 40); // Slightly faster typing
       } else {
         // Remove cursor after typing is complete
         setTimeout(() => {
@@ -67,12 +76,13 @@
     }
   };
 
-  // CRT Effects
+  // Minimal CRT Effects
   const CRTEffects = {
     init() {
       this.powerOnEffect();
+      this.setupScanlineFadeOut();
+      this.addSubtleInteractivity();
       this.updateUptime();
-      this.addGlowEffects();
     },
 
     powerOnEffect() {
@@ -81,8 +91,34 @@
         // Remove power-on effect after animation
         setTimeout(() => {
           powerOnElement.style.display = 'none';
-        }, 2000);
+        }, 1500); // Faster removal
       }
+    },
+
+    setupScanlineFadeOut() {
+      // Fade out scanlines after page load for better readability
+      const scanlines = document.querySelector('.scanlines');
+      if (scanlines) {
+        setTimeout(() => {
+          scanlines.classList.add('fade-out');
+        }, 3000); // Wait 3 seconds after page load
+      }
+    },
+
+    addSubtleInteractivity() {
+      // Add minimal hover effects to interactive elements
+      const interactiveElements = document.querySelectorAll('a, button, .nav-link');
+      
+      interactiveElements.forEach(element => {
+        // Remove phosphor glow, use subtle highlighting instead
+        element.addEventListener('mouseenter', () => {
+          element.style.transition = 'color 0.2s ease';
+        });
+        
+        element.addEventListener('mouseleave', () => {
+          element.style.transition = 'color 0.2s ease';
+        });
+      });
     },
 
     updateUptime() {
@@ -100,45 +136,64 @@
           uptimeElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }, 1000);
       }
-    },
-
-    addGlowEffects() {
-      // Add glow effect to interactive elements
-      const interactiveElements = document.querySelectorAll('a, button, .nav-link');
-      
-      interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-          element.classList.add('phosphor-glow');
-        });
-        
-        element.addEventListener('mouseleave', () => {
-          element.classList.remove('phosphor-glow');
-        });
-      });
     }
   };
 
-  // Terminal Cursor
+  // Clean Click Effects
+  const ClickEffects = {
+    init() {
+      this.addClickRipple();
+    },
+
+    addClickRipple() {
+      // Add subtle ripple effect to clickable elements
+      const clickableElements = document.querySelectorAll('a, button, .nav-link, .terminal-btn');
+      
+      clickableElements.forEach(element => {
+        element.addEventListener('click', (e) => {
+          this.createRipple(e, element);
+        });
+      });
+    },
+
+    createRipple(event, element) {
+      // Only add ripple if reduced motion is not preferred
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      element.classList.add('click-ripple');
+      element.classList.add('ripple-active');
+      
+      setTimeout(() => {
+        element.classList.remove('ripple-active');
+      }, 300);
+    }
+  };
+
+  // Terminal Cursor (Simplified)
   const TerminalCursor = {
     init() {
       this.cursors = document.querySelectorAll('.cursor');
-      this.startBlinking();
+      // Only animate if reduced motion is not preferred
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        this.startBlinking();
+      }
     },
 
     startBlinking() {
       this.cursors.forEach(cursor => {
         setInterval(() => {
           cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-        }, 500);
+        }, 600); // Slightly slower blink
       });
     }
   };
 
-  // Terminal Commands (Easter Eggs)
+  // Terminal Commands (Simplified)
   const TerminalCommands = {
     init() {
       this.addKeyboardShortcuts();
-      this.addTerminalCommands();
     },
 
     addKeyboardShortcuts() {
@@ -149,6 +204,12 @@
           ThemeManager.toggleTheme();
         }
         
+        // Ctrl+Shift+S to toggle scanlines
+        if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+          e.preventDefault();
+          this.toggleScanlines();
+        }
+        
         // Ctrl+Shift+D to toggle debug info
         if (e.ctrlKey && e.shiftKey && e.key === 'D') {
           e.preventDefault();
@@ -157,23 +218,10 @@
       });
     },
 
-    addTerminalCommands() {
-      // Add click handlers for terminal commands
-      document.querySelectorAll('.command').forEach(command => {
-        command.addEventListener('click', () => {
-          this.executeCommand(command.textContent);
-        });
-      });
-    },
-
-    executeCommand(command) {
-      // Simple command execution simulation
-      if (command.includes('ls')) {
-        console.log('📁 Listing directory contents...');
-      } else if (command.includes('cat')) {
-        console.log('📄 Reading file...');
-      } else if (command.includes('git')) {
-        console.log('🔄 Git operation...');
+    toggleScanlines() {
+      const scanlines = document.querySelector('.scanlines');
+      if (scanlines) {
+        scanlines.classList.toggle('fade-out');
       }
     },
 
@@ -197,14 +245,20 @@
         color: var(--text-primary);
         z-index: 9999;
         max-width: 300px;
+        border-radius: 4px;
       `;
       
       debugDiv.innerHTML = `
+        <div><strong>Debug Info</strong></div>
         <div>Theme: ${ThemeManager.currentTheme}</div>
-        <div>User Agent: ${navigator.userAgent.split(' ')[0]}</div>
+        <div>Reduced Motion: ${window.matchMedia('(prefers-reduced-motion: reduce)').matches}</div>
         <div>Screen: ${screen.width}x${screen.height}</div>
         <div>Viewport: ${window.innerWidth}x${window.innerHeight}</div>
-        <div>Timestamp: ${new Date().toISOString()}</div>
+        <div>Timestamp: ${new Date().toLocaleTimeString()}</div>
+        <div style="margin-top: 0.5rem; font-size: 0.7rem;">
+          <div>Ctrl+Shift+T: Toggle theme</div>
+          <div>Ctrl+Shift+S: Toggle scanlines</div>
+        </div>
       `;
       
       document.body.appendChild(debugDiv);
@@ -212,34 +266,10 @@
     }
   };
 
-  // Responsive Navigation
+  // Responsive Navigation (Simplified)
   const ResponsiveNav = {
     init() {
-      this.createMobileMenu();
       this.handleResize();
-    },
-
-    createMobileMenu() {
-      const nav = document.querySelector('.directory-listing');
-      if (!nav) return;
-
-      const mobileToggle = document.createElement('button');
-      mobileToggle.innerHTML = '☰ MENU';
-      mobileToggle.className = 'mobile-nav-toggle terminal-btn';
-      mobileToggle.style.cssText = `
-        display: none;
-        margin-bottom: 1rem;
-        
-        @media (max-width: 768px) {
-          display: block;
-        }
-      `;
-
-      nav.parentNode.insertBefore(mobileToggle, nav);
-
-      mobileToggle.addEventListener('click', () => {
-        nav.classList.toggle('mobile-open');
-      });
     },
 
     handleResize() {
@@ -252,7 +282,7 @@
     }
   };
 
-  // Performance Monitoring
+  // Performance Monitoring (Minimal)
   const PerformanceMonitor = {
     init() {
       this.monitorPerformance();
@@ -262,14 +292,15 @@
       // Monitor page load performance
       window.addEventListener('load', () => {
         const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-        console.log(`⚡ Page loaded in ${loadTime}ms`);
+        console.log(`⚡ Terminal Blog loaded in ${loadTime}ms`);
         
-        // Log to debug info if available
+        // Add performance info to debug panel
         setTimeout(() => {
           const debugInfo = document.getElementById('debug-info');
           if (debugInfo) {
             const perfDiv = document.createElement('div');
             perfDiv.textContent = `Load Time: ${loadTime}ms`;
+            perfDiv.style.fontSize = '0.7rem';
             debugInfo.appendChild(perfDiv);
           }
         }, 100);
@@ -277,23 +308,67 @@
     }
   };
 
+  // Accessibility Helper
+  const AccessibilityHelper = {
+    init() {
+      this.setupFocusManagement();
+      this.setupReducedMotionHandling();
+    },
+
+    setupFocusManagement() {
+      // Ensure proper focus management for keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          document.body.classList.add('keyboard-navigation');
+        }
+      });
+
+      document.addEventListener('mousedown', () => {
+        document.body.classList.remove('keyboard-navigation');
+      });
+    },
+
+    setupReducedMotionHandling() {
+      // Respect user's motion preferences
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      
+      const handleMotionChange = (e) => {
+        if (e.matches) {
+          document.body.classList.add('reduced-motion');
+          // Hide scanlines completely for reduced motion users
+          const scanlines = document.querySelector('.scanlines');
+          if (scanlines) {
+            scanlines.style.display = 'none';
+          }
+        } else {
+          document.body.classList.remove('reduced-motion');
+        }
+      };
+
+      reducedMotion.addListener(handleMotionChange);
+      handleMotionChange(reducedMotion);
+    }
+  };
+
   // Initialize everything when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
+    console.log('🖥️  Initializing Minimal Terminal Blog...');
+    
     ThemeManager.init();
-    TypingEffect.init();
     CRTEffects.init();
+    ClickEffects.init();
     TerminalCursor.init();
     TerminalCommands.init();
     ResponsiveNav.init();
     PerformanceMonitor.init();
+    AccessibilityHelper.init();
     
-    console.log('🖥️  Terminal Blog initialized');
+    // Only init typing effect if not reduced motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      TypingEffect.init();
+    }
+    
+    console.log('✅ Terminal Blog ready - optimized for legibility');
   });
-
-  // Reduced motion support
-  const respectsReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (respectsReducedMotion) {
-    document.body.classList.add('reduced-motion');
-  }
 
 })(); 

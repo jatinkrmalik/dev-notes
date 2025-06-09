@@ -1,6 +1,10 @@
 # Site settings
-title: "Jatin's Terminal"
-description: "Principal Engineer at Atlassian • Tech wizard diving deep into code and culture • From algorithms to home labs"
+title: "Jatin's Dev Notes"
+email: "jatin@example.com"
+description: >-
+  Raw technical explorations and dev notes from a Principal Engineer. 
+  Unpolished thoughts on distributed systems, cloud architecture, 
+  home lab experiments, and everything in between.
 baseurl: ""
 url: "https://jatinkrmalik.github.io" # Change this to your GitHub Pages URL
 author: "Jatin K Malik"

@@ -2,98 +2,62 @@
 layout: default
 ---
 
-<div class="home-terminal">
-  <div class="terminal-prompt">
-    <span class="prompt-symbol">$</span>
-    <span class="command">find ./posts -name "*.md" | head -10</span>
-    <span class="cursor">_</span>
+<div class="welcome-section">
+  <h1>Digital Lab Notebook</h1>
+  <div class="intro-text">
+    Raw technical explorations from a Principal Engineer at Atlassian. Unpolished thoughts on distributed systems, cloud architecture, home lab experiments, and everything in between. This is where I document discoveries, failures, and random engineering insights.
   </div>
+  
+  <div class="quick-stats">
+    <span class="stat-item">{{ site.posts.size }} notes</span>
+    <span class="stat-separator">•</span>
+    <span class="stat-item">Last updated: {{ site.posts.first.date | date: "%b %Y" }}</span>
+    <span class="stat-separator">•</span>
+    <span class="stat-item">Chicago, USA</span>
+  </div>
+</div>
 
-  <div class="welcome-message">
-    <h1 class="typing-effect">Welcome to Jatin's Terminal</h1>
-    <p>Principal Engineer at Atlassian diving deep into code and culture. From distributed systems to home labs, Docker optimization to chai recipes, travel hacking to Hyderabadi biryani — exploring smarter ways to get things done.</p>
+<div class="posts-section">
+  <h2>Recent Dev Notes</h2>
+  
+  <div class="post-list">
+    {% for post in site.posts limit:5 %}
+    <article class="post-item">
+      <h3 class="post-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h3>
+      
+      <div class="post-meta">
+        <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+        <span class="read-time">{{ post.content | number_of_words | divided_by: 200 }} min read</span>
+      </div>
+      
+      <div class="post-excerpt">
+        {{ post.excerpt | strip_html | truncatewords: 40 }}
+      </div>
+      
+      {% if post.tags %}
+      <div class="post-tags">
+        {% for tag in post.tags %}
+        <span class="tag">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </article>
+    {% endfor %}
   </div>
+  
+  {% if site.posts.size > 5 %}
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="{{ '/posts/' | relative_url }}" class="terminal-btn">Browse All {{ site.posts.size }} Notes</a>
+  </div>
+  {% endif %}
+</div>
 
-  <div class="recent-posts">
-    <h2>Recent Posts</h2>
-    
-    {% if site.posts.size > 0 %}
-    <ul class="post-list">
-      {% for post in site.posts limit:5 %}
-      <li class="post-item">
-        <div class="file-listing">
-          <span class="file-permissions">-rw-r--r--</span>
-          <span class="file-owner">jatin</span>
-          <span class="file-group">blog</span>
-          <span class="file-size">{{ post.content | size }}</span>
-          <span class="file-date">{{ post.date | date: "%b %d %H:%M" }}</span>
-          <a href="{{ post.url | relative_url }}" class="post-link">{{ post.title | escape }}</a>
-        </div>
-        
-        {% if post.excerpt %}
-        <div class="post-excerpt">
-          {{ post.excerpt | strip_html | truncatewords: 30 }}
-        </div>
-        {% endif %}
-        
-        <div class="post-meta-info">
-          {% if post.categories.size > 0 %}
-          <span class="categories">
-            {% for category in post.categories %}
-            <span class="category">{{ category }}</span>
-            {% endfor %}
-          </span>
-          {% endif %}
-          
-          {% if post.tags.size > 0 %}
-          <span class="tags">
-            {% for tag in post.tags %}
-            <span class="tag">#{{ tag }}</span>
-            {% endfor %}
-          </span>
-          {% endif %}
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-    
-    <div class="view-all">
-      <a href="{{ '/posts/' | relative_url }}" class="terminal-btn">
-        View All Posts
-      </a>
-    </div>
-    {% else %}
-    <div class="no-posts">
-      <p>No posts found. Create your first post in the `_posts` directory.</p>
-      <div class="example-command">
-        <span class="prompt-symbol">$</span>
-        <span class="command">touch _posts/{{ 'now' | date: '%Y-%m-%d' }}-welcome-to-terminal-blog.md</span>
-      </div>
-    </div>
-    {% endif %}
-  </div>
-
-  <div class="system-status">
-    <h3>System Status</h3>
-    <div class="status-grid">
-      <div class="status-item">
-        <span class="status-label">Posts:</span>
-        <span class="status-value">{{ site.posts.size }}</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label">Theme:</span>
-        <span class="status-value" id="current-theme">Dark</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label">Build:</span>
-        <span class="status-value">{{ site.time | date: "%Y.%m.%d" }}</span>
-      </div>
-      <div class="status-item">
-        <span class="status-label">Generator:</span>
-        <span class="status-value">Jekyll {{ jekyll.version }}</span>
-      </div>
-    </div>
-  </div>
+<div class="cta-section">
+  <h3>What You'll Find Here</h3>
+  <p>Architecture decisions, debugging sessions, home lab experiments, performance optimizations, and the occasional "why did I think this would work?" moment. Some notes are polished, others are 3am brain dumps. All are authentic.</p>
+  <a href="{{ '/about/' | relative_url }}" class="cta-button">About Me</a>
 </div>
 
 <style>
