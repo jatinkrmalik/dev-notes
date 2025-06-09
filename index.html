@@ -23,7 +23,7 @@ layout: default
     {% for post in site.posts limit:5 %}
     <a href="{{ post.url | relative_url }}" class="post-card-link">
       <article class="post-item">
-        <h3 class="post-title">{{ post.title }}</h3>
+        <div class="post-title">{{ post.title }}</div>
         
         <div class="post-meta">
           <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
