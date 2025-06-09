@@ -62,7 +62,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' %}active{% endif %}">
+              <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' or page.layout == 'post' %}active{% endif %}">
                 <span class="file-type">[LOG]</span>
                 <span class="file-name">archive</span>
               </a>

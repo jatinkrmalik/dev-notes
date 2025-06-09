@@ -63,7 +63,17 @@
       
       // Show easter egg toast when entering retro mode
       if (newTheme === 'dark') {
+        this.triggerBoltBounce();
         ToastManager.showEasterEggToast();
+      }
+    },
+
+    triggerBoltBounce() {
+      if (this.easterEggToggle) {
+        this.easterEggToggle.classList.add('clicked');
+        setTimeout(() => {
+          this.easterEggToggle.classList.remove('clicked');
+        }, 600);
       }
     },
 
@@ -84,10 +94,10 @@
 
     showEasterEggToast() {
       this.showToast({
-        icon: '🎉',
-        title: 'Easter Egg Found!',
-        message: 'Welcome to retro mode! You\'ve discovered the terminal CRT experience. Enjoy the authentic 80s computing vibes!',
-        duration: 6000
+        icon: '⚡',
+        title: 'Retro Mode Activated!',
+        message: 'You\'ve unlocked the secret terminal experience! Enjoy the authentic 80s computing vibes!',
+        duration: 7000
       });
     },
 
