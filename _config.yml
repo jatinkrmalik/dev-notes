@@ -1,9 +1,9 @@
 # Site settings
-title: "Terminal Blog"
-description: "A retro CRT-style blog with phosphorescent glow"
+title: "Jatin's Terminal"
+description: "Principal Engineer at Atlassian • Tech wizard diving deep into code and culture • From algorithms to home labs"
 baseurl: ""
-url: "https://username.github.io" # Change this to your GitHub Pages URL
-author: "Your Name"
+url: "https://jatinkrmalik.github.io" # Change this to your GitHub Pages URL
+author: "Jatin K Malik"
 
 # Build settings
 markdown: kramdown
@@ -50,9 +50,12 @@ exclude:
 
 # SEO settings
 social:
-  name: "Your Name"
+  name: "Jatin K Malik"
   links:
-    - https://github.com/username
+    - https://j47.in
+    - https://www.linkedin.com/in/jatinkrmalik/
+    - https://jatinkrmalik.com
+    - https://github.com/jatinkrmalik
 
 # Theme settings
 theme_color: "#00ff00"
