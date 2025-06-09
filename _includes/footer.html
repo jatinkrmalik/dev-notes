@@ -1,0 +1,38 @@
+<footer class="site-footer">
+  <div class="terminal-footer">
+    <div class="system-info">
+      <div class="info-line">
+        <span class="label">SYSTEM:</span>
+        <span class="value">Jekyll Terminal v1.0</span>
+      </div>
+      <div class="info-line">
+        <span class="label">UPTIME:</span>
+        <span class="value" id="uptime">Loading...</span>
+      </div>
+      <div class="info-line">
+        <span class="label">LAST UPDATE:</span>
+        <span class="value">{{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</span>
+      </div>
+    </div>
+    
+    <div class="footer-nav">
+      <a href="{{ '/feed.xml' | relative_url }}" class="footer-link">
+        <span class="command">cat feed.xml</span>
+      </a>
+      <span class="separator">|</span>
+      <a href="https://github.com/{{ site.github_username | default: 'username' }}" class="footer-link" target="_blank" rel="noopener noreferrer">
+        <span class="command">git remote -v</span>
+      </a>
+    </div>
+    
+    <div class="copyright">
+      <div class="terminal-prompt">
+        <span class="prompt-symbol">$</span>
+        <span class="command">echo "© {{ 'now' | date: '%Y' }} {{ site.author | default: 'Terminal User' }}"</span>
+      </div>
+      <div class="output">
+        © {{ 'now' | date: '%Y' }} {{ site.author | default: 'Terminal User' }}
+      </div>
+    </div>
+  </div>
+</footer> 

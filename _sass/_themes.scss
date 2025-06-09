@@ -1,0 +1,72 @@
+// CRT Theme Variables
+
+// Dark Theme (Green Phosphor Terminal)
+:root[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --text-primary: #00ff00;
+  --text-secondary: #00cc00;
+  --text-accent: #00ff41;
+  --text-dim: #008800;
+  --border-color: #00ff00;
+  --glow-color: #00ff00;
+  --glow-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+  --glow-text: 0 0 5px #00ff00, 0 0 10px #00ff00;
+  --scan-line-color: rgba(0, 255, 0, 0.1);
+  --screen-glow: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+}
+
+// Light Theme (Amber Terminal)
+:root[data-theme="light"] {
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #f7f0dc;
+  --text-primary: #ff8c00;
+  --text-secondary: #cc7000;
+  --text-accent: #ff9500;
+  --text-dim: #b8660d;
+  --border-color: #ff8c00;
+  --glow-color: #ff8c00;
+  --glow-shadow: 0 0 8px #ff8c00, 0 0 16px #ff8c00, 0 0 24px #ff8c00;
+  --glow-text: 0 0 4px #ff8c00, 0 0 8px #ff8c00;
+  --scan-line-color: rgba(255, 140, 0, 0.08);
+  --screen-glow: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 70%);
+}
+
+// Theme transition
+html {
+  transition: all 0.3s ease-in-out;
+}
+
+// Common theme styles
+* {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+// Links
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: var(--text-primary);
+    text-shadow: var(--glow-text);
+  }
+}
+
+// Selection
+::selection {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+} 

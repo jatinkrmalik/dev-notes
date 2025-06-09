@@ -1,0 +1,65 @@
+---
+layout: default
+---
+
+<article class="terminal-post">
+  <header class="post-header">
+    <div class="terminal-prompt">
+      <span class="prompt-symbol">$</span>
+      <span class="command">cat {{ page.title | slugify }}.md</span>
+      <span class="cursor">_</span>
+    </div>
+    
+    <h1 class="post-title typing-effect">{{ page.title }}</h1>
+    
+    <div class="post-meta">
+      <div class="file-info">
+        <span class="file-size">{{ content | size }} bytes</span>
+        <span class="file-date">{{ page.date | date: "%Y-%m-%d %H:%M" }}</span>
+        {% if page.author %}<span class="file-owner">{{ page.author }}</span>{% endif %}
+      </div>
+      
+      {% if page.categories.size > 0 %}
+      <div class="post-categories">
+        <span class="label">Categories:</span>
+        {% for category in page.categories %}
+        <span class="category">{{ category }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      {% if page.tags.size > 0 %}
+      <div class="post-tags">
+        <span class="label">Tags:</span>
+        {% for tag in page.tags %}
+        <span class="tag">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <div class="terminal-divider">
+      <span>--- End of File ---</span>
+    </div>
+    
+    <div class="post-navigation">
+      {% if page.previous.url %}
+      <a href="{{ page.previous.url | relative_url }}" class="nav-link prev">
+        <span class="nav-symbol">&lt;</span> {{ page.previous.title }}
+      </a>
+      {% endif %}
+      
+      {% if page.next.url %}
+      <a href="{{ page.next.url | relative_url }}" class="nav-link next">
+        {{ page.next.title }} <span class="nav-symbol">&gt;</span>
+      </a>
+      {% endif %}
+    </div>
+  </footer>
+</article> 

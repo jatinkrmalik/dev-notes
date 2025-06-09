@@ -1,0 +1,192 @@
+// Base styles and typography
+
+// Font stacks
+$font-terminal: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+
+// Reset and base styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-terminal;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-terminal;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  text-shadow: var(--glow-text);
+  
+  &::before {
+    content: '# ';
+    color: var(--text-dim);
+  }
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+h4, h5, h6 {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+// Lists
+ul, ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  
+  li {
+    margin-bottom: 0.5rem;
+    
+    &::marker {
+      color: var(--text-dim);
+    }
+  }
+}
+
+// Code
+code {
+  font-family: $font-terminal;
+  font-size: 0.9em;
+  background-color: var(--bg-secondary);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  border: 1px solid var(--text-dim);
+  color: var(--text-accent);
+}
+
+pre {
+  font-family: $font-terminal;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--text-dim);
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  position: relative;
+  
+  code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.85rem;
+  }
+  
+  &::before {
+    content: '$ ';
+    color: var(--text-dim);
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+}
+
+// Blockquotes
+blockquote {
+  border-left: 4px solid var(--text-dim);
+  margin-left: 0;
+  padding-left: 1rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  
+  &::before {
+    content: '> ';
+    color: var(--text-dim);
+  }
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-family: $font-terminal;
+  font-size: 0.9rem;
+  
+  th, td {
+    padding: 0.5rem 1rem;
+    text-align: left;
+    border: 1px solid var(--text-dim);
+  }
+  
+  th {
+    background-color: var(--bg-secondary);
+    font-weight: 500;
+    color: var(--text-accent);
+  }
+  
+  tr:nth-child(even) {
+    background-color: var(--bg-secondary);
+  }
+}
+
+// Horizontal rule
+hr {
+  border: none;
+  height: 1px;
+  background: var(--text-dim);
+  margin: 2rem 0;
+  position: relative;
+  
+  &::before {
+    content: '---';
+    position: absolute;
+    left: 50%;
+    top: -0.5rem;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    padding: 0 1rem;
+    color: var(--text-dim);
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid var(--text-dim);
+  box-shadow: var(--glow-shadow);
+} 

@@ -1,0 +1,22 @@
+{
+    "name": "Terminal Blog",
+    "short_name": "Terminal",
+    "description": "A retro CRT-style blog with phosphorescent glow",
+    "icons": [
+        {
+            "src": "/assets/images/favicon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/images/favicon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "orientation": "portrait-primary"
+}

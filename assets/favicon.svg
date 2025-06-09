@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Terminal window background -->
+  <rect width="32" height="32" rx="3" ry="3" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+  
+  <!-- Terminal title bar -->
+  <rect x="1" y="1" width="30" height="8" rx="2" ry="2" fill="#2a2a2a"/>
+  
+  <!-- Window controls (traffic lights) -->
+  <circle cx="4" cy="5" r="1.5" fill="#ff5f56"/>
+  <circle cx="8" cy="5" r="1.5" fill="#ffbd2e"/>
+  <circle cx="12" cy="5" r="1.5" fill="#27ca3f"/>
+  
+  <!-- Terminal screen area -->
+  <rect x="2" y="10" width="28" height="20" rx="1" ry="1" fill="#000000"/>
+  
+  <!-- Terminal prompt and cursor -->
+  <text x="4" y="16" font-family="monospace" font-size="4" fill="#00ff00">$</text>
+  <text x="7" y="16" font-family="monospace" font-size="4" fill="#00ff00">blog</text>
+  
+  <!-- Blinking cursor -->
+  <rect x="4" y="19" width="6" height="1" fill="#00ff00">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Scan lines effect -->
+  <defs>
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="32" height="2">
+      <rect width="32" height="1" fill="none"/>
+      <rect y="1" width="32" height="1" fill="#00ff00" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect x="2" y="10" width="28" height="20" fill="url(#scanlines)" rx="1" ry="1"/>
+  
+  <!-- Subtle glow effect -->
+  <rect x="2" y="10" width="28" height="20" rx="1" ry="1" fill="none" stroke="#00ff00" stroke-width="0.5" opacity="0.3"/>
+</svg> 

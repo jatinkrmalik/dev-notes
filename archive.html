@@ -1,0 +1,320 @@
+---
+layout: page
+title: Archive
+description: "Posts organized by date"
+permalink: /archive/
+---
+
+<div class="archive-page">
+  <div class="terminal-prompt">
+    <span class="prompt-symbol">$</span>
+    <span class="command">ls -la ./posts/ | sort -k6,7</span>
+    <span class="cursor">_</span>
+  </div>
+
+  {% if site.posts.size > 0 %}
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  
+  <div class="archive-timeline">
+    {% for year in posts_by_year %}
+    <div class="year-section">
+      <h2 class="year-header">
+        <span class="year-symbol">📁</span>
+        {{ year.name }}
+        <span class="post-count">({{ year.items.size }} posts)</span>
+      </h2>
+      
+      {% assign posts_by_month = year.items | group_by_exp: "post", "post.date | date: '%B'" %}
+      {% for month in posts_by_month %}
+      <div class="month-section">
+        <h3 class="month-header">
+          <span class="month-symbol">├──</span>
+          {{ month.name }}
+          <span class="month-count">({{ month.items.size }})</span>
+        </h3>
+        
+        <ul class="posts-in-month">
+          {% for post in month.items %}
+          <li class="archive-post-item">
+            <div class="post-line">
+              <span class="tree-symbol">│   ├──</span>
+              <span class="post-date">{{ post.date | date: "%d" }}</span>
+              <a href="{{ post.url | relative_url }}" class="archive-post-link">{{ post.title | escape }}</a>
+              {% if post.categories.size > 0 %}
+              <span class="post-categories">
+                [{% for category in post.categories %}{{ category }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+              </span>
+              {% endif %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div class="archive-summary">
+    <div class="terminal-divider">
+      <span>--- Archive Summary ---</span>
+    </div>
+    
+    <div class="summary-stats">
+      <div class="summary-grid">
+        <div class="summary-item">
+          <span class="summary-label">Total Posts:</span>
+          <span class="summary-value">{{ site.posts.size }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Years Active:</span>
+          <span class="summary-value">{{ posts_by_year.size }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">First Post:</span>
+          <span class="summary-value">{{ site.posts.last.date | date: "%B %Y" }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Latest Post:</span>
+          <span class="summary-value">{{ site.posts.first.date | date: "%B %Y" }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="categories-summary">
+      <h3>Categories</h3>
+      {% assign all_categories = site.posts | map: 'categories' | join: ',' | split: ',' | uniq | sort %}
+      <div class="categories-list">
+        {% for category in all_categories %}
+        {% if category != "" %}
+        {% assign category_posts = site.posts | where_exp: "post", "post.categories contains category" %}
+        <span class="category-item">
+          <span class="category-name">{{ category }}</span>
+          <span class="category-count">({{ category_posts.size }})</span>
+        </span>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  {% else %}
+  <div class="empty-archive">
+    <p>No posts in the archive yet.</p>
+    <div class="terminal-prompt">
+      <span class="prompt-symbol">$</span>
+      <span class="command">echo "Time to start writing!"</span>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<style>
+.archive-page {
+  max-width: 100%;
+}
+
+.archive-timeline {
+  margin: 2rem 0;
+}
+
+.year-section {
+  margin-bottom: 3rem;
+}
+
+.year-header {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.year-header::before {
+  display: none;
+}
+
+.year-symbol {
+  font-size: 1.2rem;
+}
+
+.post-count {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-weight: normal;
+}
+
+.month-section {
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+}
+
+.month-header {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.month-header::before {
+  display: none;
+}
+
+.month-symbol {
+  color: var(--text-dim);
+  font-family: inherit;
+}
+
+.month-count {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-weight: normal;
+}
+
+.posts-in-month {
+  list-style: none;
+  margin: 0;
+  margin-left: 1rem;
+}
+
+.archive-post-item {
+  margin-bottom: 0.5rem;
+}
+
+.post-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tree-symbol {
+  color: var(--text-dim);
+  font-family: inherit;
+  min-width: 60px;
+}
+
+.post-date {
+  color: var(--text-dim);
+  min-width: 30px;
+  text-align: right;
+}
+
+.archive-post-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  flex-grow: 1;
+}
+
+.archive-post-link:hover {
+  color: var(--text-accent);
+  text-shadow: var(--glow-text);
+}
+
+.post-categories {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.archive-summary {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--text-dim);
+}
+
+.summary-stats {
+  margin: 2rem 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border: 1px solid var(--text-dim);
+  border-radius: 3px;
+  background: var(--bg-secondary);
+}
+
+.summary-label {
+  color: var(--text-dim);
+}
+
+.summary-value {
+  color: var(--text-accent);
+  font-weight: 500;
+}
+
+.categories-summary {
+  margin-top: 2rem;
+}
+
+.categories-summary h3 {
+  margin-bottom: 1rem;
+}
+
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.category-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-dim);
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.category-name {
+  color: var(--text-primary);
+}
+
+.category-count {
+  color: var(--text-dim);
+  margin-left: 0.3rem;
+}
+
+.empty-archive {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid var(--text-dim);
+  border-radius: 5px;
+  background: var(--bg-secondary);
+}
+
+@media (max-width: 768px) {
+  .post-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .tree-symbol,
+  .post-date {
+    min-width: auto;
+  }
+  
+  .month-section {
+    margin-left: 0.5rem;
+  }
+  
+  .posts-in-month {
+    margin-left: 0.5rem;
+  }
+  
+  .categories-list {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+</style> 

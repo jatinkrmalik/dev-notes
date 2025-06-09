@@ -1,0 +1,196 @@
+// Syntax highlighting for code blocks with terminal theme
+
+.highlight {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-dim);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  position: relative;
+  
+  // Terminal prompt for code blocks
+  &::before {
+    content: '$ ';
+    color: var(--text-accent);
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1;
+  }
+  
+  pre {
+    margin: 0;
+    padding: 0;
+    padding-left: 1.5rem;
+    background: none;
+    border: none;
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  code {
+    font-family: inherit;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+}
+
+// Rouge syntax highlighting colors
+.highlight {
+  // Comments
+  .c, .c1, .cm, .cp, .cs {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  
+  // Errors
+  .err {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+  }
+  
+  // Keywords
+  .k, .kc, .kd, .kn, .kp, .kr, .kt {
+    color: var(--text-accent);
+    font-weight: 500;
+  }
+  
+  // Literals
+  .l, .ld, .m, .mb, .mf, .mh, .mi, .il, .mo, .mx {
+    color: var(--text-primary);
+  }
+  
+  // Names
+  .n, .na, .nb, .bp, .nc, .no, .nd, .ni, .ne, .nf, .nl, .nn, .nx, .py, .nt, .nv, .vc, .vg, .vi {
+    color: var(--text-primary);
+  }
+  
+  // Operators
+  .o, .ow {
+    color: var(--text-accent);
+  }
+  
+  // Punctuation
+  .p {
+    color: var(--text-primary);
+  }
+  
+  // Strings
+  .s, .sa, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss {
+    color: var(--text-secondary);
+  }
+  
+  // Generic tokens
+  .ge {
+    font-style: italic;
+  }
+  
+  .gs {
+    font-weight: bold;
+  }
+  
+  .gh {
+    color: var(--text-accent);
+    font-weight: bold;
+  }
+  
+  .gi {
+    color: #4ade80;
+    background-color: rgba(74, 222, 128, 0.1);
+  }
+  
+  .gd {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+  }
+  
+  .gu {
+    color: var(--text-accent);
+    font-weight: bold;
+  }
+  
+  .gt {
+    color: var(--text-dim);
+  }
+  
+  .gl {
+    text-decoration: underline;
+  }
+}
+
+// Language-specific styling
+.language-bash, .language-shell {
+  .highlight::before {
+    content: '$ ';
+    color: var(--text-accent);
+  }
+}
+
+.language-javascript, .language-js {
+  .highlight::before {
+    content: '> ';
+    color: var(--text-accent);
+  }
+}
+
+.language-python {
+  .highlight::before {
+    content: '>>> ';
+    color: var(--text-accent);
+  }
+}
+
+.language-ruby {
+  .highlight::before {
+    content: 'irb> ';
+    color: var(--text-accent);
+  }
+}
+
+// Inline code styling
+code:not(.highlight code) {
+  background: var(--bg-secondary);
+  color: var(--text-accent);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  border: 1px solid var(--text-dim);
+  font-size: 0.9em;
+  
+  &::before, &::after {
+    content: '`';
+    color: var(--text-dim);
+  }
+}
+
+// Code block with line numbers
+.highlight .lineno {
+  color: var(--text-dim);
+  margin-right: 1rem;
+  user-select: none;
+  
+  &::after {
+    content: ' │ ';
+    color: var(--text-dim);
+  }
+}
+
+// Keyboard shortcuts styling
+kbd {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-dim);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 var(--text-dim);
+  color: var(--text-primary);
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.8em;
+  line-height: 1;
+  padding: 0.2em 0.4em;
+  white-space: nowrap;
+} 

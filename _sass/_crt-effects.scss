@@ -1,0 +1,281 @@
+// CRT Monitor Effects
+
+// Main CRT screen container
+.crt-screen {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  overflow: hidden;
+  
+  // Subtle screen curvature
+  border-radius: 10px;
+  
+  // Screen glow effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: var(--screen-glow);
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  // Add subtle shadow for depth
+  box-shadow: 
+    inset 0 0 50px rgba(0, 0, 0, 0.5),
+    0 0 50px var(--glow-color);
+}
+
+// Scan lines overlay
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  
+  // Animated scan lines
+  background: linear-gradient(
+    transparent 50%,
+    var(--scan-line-color) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanlines 0.1s linear infinite;
+  
+  // Subtle flicker effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      transparent 0%,
+      var(--scan-line-color) 50%,
+      transparent 100%
+    );
+    animation: flicker 0.15s ease-in-out infinite alternate;
+    opacity: 0.1;
+  }
+}
+
+// Power-on effect
+.power-on-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  z-index: 9999;
+  pointer-events: none;
+  animation: powerOn 2s ease-out forwards;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 2px;
+    background: var(--text-primary);
+    transform: translate(-50%, -50%);
+    box-shadow: var(--glow-shadow);
+    animation: powerOnGlow 2s ease-out forwards;
+  }
+}
+
+// CRT body styling
+.crt-body {
+  background: #1a1a1a;
+  padding: 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+// Phosphor glow for text
+.phosphor-glow {
+  text-shadow: var(--glow-text);
+  
+  &:hover {
+    text-shadow: var(--glow-shadow);
+  }
+}
+
+// Typing effect for titles
+.typing-effect {
+  overflow: hidden;
+  border-right: 2px solid var(--text-primary);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: 
+    typing 2s steps(40, end),
+    blink-caret 1s step-end infinite;
+}
+
+// Cursor animation
+.cursor {
+  display: inline-block;
+  background-color: var(--text-primary);
+  width: 8px;
+  height: 1.2em;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+// Terminal-style button effects
+.terminal-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--text-dim);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  
+  &::before {
+    content: '[ ';
+    color: var(--text-dim);
+  }
+  
+  &::after {
+    content: ' ]';
+    color: var(--text-dim);
+  }
+  
+  &:hover {
+    background: var(--bg-primary);
+    border-color: var(--text-primary);
+    box-shadow: var(--glow-text);
+    text-shadow: var(--glow-text);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Animations
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.05;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes powerOn {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(0.1);
+  }
+  51% {
+    opacity: 0;
+    transform: scaleY(0.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+@keyframes powerOnGlow {
+  0% {
+    width: 2px;
+    height: 2px;
+    opacity: 1;
+  }
+  50% {
+    width: 100vw;
+    height: 2px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--text-primary);
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .scanlines {
+    animation: none;
+    
+    &::before {
+      animation: none;
+    }
+  }
+  
+  .power-on-effect {
+    animation: none;
+    opacity: 0;
+    
+    &::before {
+      animation: none;
+    }
+  }
+  
+  .typing-effect {
+    animation: none;
+    border-right: none;
+    overflow: visible;
+    white-space: normal;
+  }
+  
+  .cursor {
+    animation: none;
+  }
+} 

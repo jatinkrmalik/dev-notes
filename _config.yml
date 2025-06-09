@@ -1,0 +1,59 @@
+# Site settings
+title: "Terminal Blog"
+description: "A retro CRT-style blog with phosphorescent glow"
+baseurl: ""
+url: "https://username.github.io" # Change this to your GitHub Pages URL
+author: "Your Name"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# GitHub Pages safe gems
+safe: true
+whitelist:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Sass configuration
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Collections
+collections:
+  posts:
+    output: true
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Remove pagination for now (not essential for initial setup)
+
+# SEO settings
+social:
+  name: "Your Name"
+  links:
+    - https://github.com/username
+
+# Theme settings
+theme_color: "#00ff00"
+background_color: "#000000" 
