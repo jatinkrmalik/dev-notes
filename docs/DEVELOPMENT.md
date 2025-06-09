@@ -1,6 +1,6 @@
 # Development Guide
 
-Technical development workflow and guidelines for Jatin's Dev Notes blog.
+Technical development workflow and guidelines for jatin's dev notes blog.
 
 ## 🚀 Quick Start
 
@@ -59,7 +59,7 @@ blog-new/
 #### `_config.yml`
 ```yaml
 # Essential settings
-title: "Jatin's Dev Notes"
+title: "jatin's dev notes"
 description: "Raw technical explorations..."
 url: ""  # Set for production
 baseurl: ""  # Set if subdirectory

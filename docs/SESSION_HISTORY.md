@@ -1,6 +1,6 @@
 # Session History - Retro Terminal Blog Development
 
-Complete chronological record of the development sessions for Jatin's Dev Notes blog.
+Complete chronological record of the development sessions for jatin's dev notes blog.
 
 ## 📋 Table of Contents
 
@@ -179,11 +179,11 @@ Clean up UI issues and improve content presentation for better user experience.
 
 #### 4. Navigation Improvement
 **Problem**: Site title wasn't clickable
-**Solution**: Made "Jatin's Dev Notes" clickable to redirect to home
+**Solution**: Made "jatin's dev notes" clickable to redirect to home
 **Implementation**:
 ```html
 <h1 class="site-title">
-  <a href="{{ '/' | relative_url }}" class="site-title-link">Jatin's Dev Notes</a>
+  <a href="{{ '/' | relative_url }}" class="site-title-link">jatin's dev notes</a>
 </h1>
 ```
 

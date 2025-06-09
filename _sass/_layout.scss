@@ -315,7 +315,7 @@
 
 // Post metadata
 .post-meta {
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   gap: 0.5rem;
   font-size: 0.9rem;
@@ -850,7 +850,7 @@
     }
     
     .post-meta {
-      display: flex;
+      display: inline-block;
       align-items: center;
       gap: 0.5rem;
       color: var(--text-dim);

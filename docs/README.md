@@ -1,4 +1,4 @@
-# Jatin's Dev Notes - Retro Terminal Blog
+# jatin's dev notes - Retro Terminal Blog
 
 ## Project Overview
 

@@ -33,7 +33,7 @@ blog-new/
 #### `_config.yml`
 ```yaml
 # Site settings
-title: "Jatin's Dev Notes"
+title: "jatin's dev notes"
 email: your-email@example.com
 description: Raw technical explorations from a Principal Engineer at Atlassian
 baseurl: ""

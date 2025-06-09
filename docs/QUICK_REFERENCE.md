@@ -1,6 +1,6 @@
 # Quick Reference
 
-Essential commands and information for rapid development of Jatin's Dev Notes blog.
+Essential commands and information for rapid development of jatin's dev notes blog.
 
 ## 🚀 Essential Commands
 

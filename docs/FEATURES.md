@@ -1,6 +1,6 @@
 # Features Documentation
 
-Comprehensive overview of all features implemented in Jatin's Dev Notes retro terminal blog.
+Comprehensive overview of all features implemented in jatin's dev notes retro terminal blog.
 
 ## 🎨 Visual Features
 
@@ -232,4 +232,4 @@ Comprehensive overview of all features implemented in Jatin's Dev Notes retro te
 - **Image Optimization** - Compressed, modern formats
 - **Font Loading** - Optimized web fonts
 
-This comprehensive feature set makes Jatin's Dev Notes a modern, performant, and visually striking blog that successfully combines retro aesthetics with contemporary web standards. 
+This comprehensive feature set makes jatin's dev notes a modern, performant, and visually striking blog that successfully combines retro aesthetics with contemporary web standards. 
