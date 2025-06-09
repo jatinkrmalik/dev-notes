@@ -20,33 +20,33 @@ mkdir -p assets/images
 echo "📱 Generating PNG favicons..."
 
 # Convert the simple SVG to various PNG sizes
-convert -background transparent assets/favicon-simple.svg -resize 16x16 assets/images/favicon-16x16.png
-convert -background transparent assets/favicon-simple.svg -resize 32x32 assets/images/favicon-32x32.png
-convert -background transparent assets/favicon-simple.svg -resize 48x48 assets/images/favicon-48x48.png
-convert -background transparent assets/favicon-simple.svg -resize 64x64 assets/images/favicon-64x64.png
-convert -background transparent assets/favicon-simple.svg -resize 96x96 assets/images/favicon-96x96.png
-convert -background transparent assets/favicon-simple.svg -resize 128x128 assets/images/favicon-128x128.png
-convert -background transparent assets/favicon-simple.svg -resize 192x192 assets/images/favicon-192x192.png
-convert -background transparent assets/favicon-simple.svg -resize 256x256 assets/images/favicon-256x256.png
+convert -background transparent assets/favicon.svg -resize 16x16 assets/images/favicon-16x16.png
+convert -background transparent assets/favicon.svg -resize 32x32 assets/images/favicon-32x32.png
+convert -background transparent assets/favicon.svg -resize 48x48 assets/images/favicon-48x48.png
+convert -background transparent assets/favicon.svg -resize 64x64 assets/images/favicon-64x64.png
+convert -background transparent assets/favicon.svg -resize 96x96 assets/images/favicon-96x96.png
+convert -background transparent assets/favicon.svg -resize 128x128 assets/images/favicon-128x128.png
+convert -background transparent assets/favicon.svg -resize 192x192 assets/images/favicon-192x192.png
+convert -background transparent assets/favicon.svg -resize 256x256 assets/images/favicon-256x256.png
 
 # Generate Apple Touch Icons
 echo "🍎 Generating Apple Touch Icons..."
-convert -background transparent assets/favicon-simple.svg -resize 180x180 assets/images/apple-touch-icon.png
-convert -background transparent assets/favicon-simple.svg -resize 152x152 assets/images/apple-touch-icon-152x152.png
-convert -background transparent assets/favicon-simple.svg -resize 144x144 assets/images/apple-touch-icon-144x144.png
-convert -background transparent assets/favicon-simple.svg -resize 120x120 assets/images/apple-touch-icon-120x120.png
-convert -background transparent assets/favicon-simple.svg -resize 114x114 assets/images/apple-touch-icon-114x114.png
-convert -background transparent assets/favicon-simple.svg -resize 76x76 assets/images/apple-touch-icon-76x76.png
-convert -background transparent assets/favicon-simple.svg -resize 72x72 assets/images/apple-touch-icon-72x72.png
-convert -background transparent assets/favicon-simple.svg -resize 60x60 assets/images/apple-touch-icon-60x60.png
-convert -background transparent assets/favicon-simple.svg -resize 57x57 assets/images/apple-touch-icon-57x57.png
+convert -background transparent assets/favicon.svg -resize 180x180 assets/images/apple-touch-icon.png
+convert -background transparent assets/favicon.svg -resize 152x152 assets/images/apple-touch-icon-152x152.png
+convert -background transparent assets/favicon.svg -resize 144x144 assets/images/apple-touch-icon-144x144.png
+convert -background transparent assets/favicon.svg -resize 120x120 assets/images/apple-touch-icon-120x120.png
+convert -background transparent assets/favicon.svg -resize 114x114 assets/images/apple-touch-icon-114x114.png
+convert -background transparent assets/favicon.svg -resize 76x76 assets/images/apple-touch-icon-76x76.png
+convert -background transparent assets/favicon.svg -resize 72x72 assets/images/apple-touch-icon-72x72.png
+convert -background transparent assets/favicon.svg -resize 60x60 assets/images/apple-touch-icon-60x60.png
+convert -background transparent assets/favicon.svg -resize 57x57 assets/images/apple-touch-icon-57x57.png
 
 # Generate Microsoft tile icons
 echo "🪟 Generating Microsoft Tile Icons..."
-convert -background "#000000" assets/favicon-simple.svg -resize 144x144 assets/images/mstile-144x144.png
-convert -background "#000000" assets/favicon-simple.svg -resize 150x150 assets/images/mstile-150x150.png
-convert -background "#000000" assets/favicon-simple.svg -resize 310x310 assets/images/mstile-310x310.png
-convert -background "#000000" assets/favicon-simple.svg -resize 310x150 assets/images/mstile-310x150.png
+convert -background "#000000" assets/favicon.svg -resize 144x144 assets/images/mstile-144x144.png
+convert -background "#000000" assets/favicon.svg -resize 150x150 assets/images/mstile-150x150.png
+convert -background "#000000" assets/favicon.svg -resize 310x310 assets/images/mstile-310x310.png
+convert -background "#000000" assets/favicon.svg -resize 310x150 assets/images/mstile-310x150.png
 
 # Generate ICO file (for older browsers)
 echo "💾 Generating ICO file..."
@@ -104,7 +104,7 @@ echo ""
 echo "📁 Generated files:"
 echo "   - favicon.ico (root)"
 echo "   - assets/favicon.svg (animated)"
-echo "   - assets/favicon-simple.svg (simple)"
+echo "   - assets/favicon.svg (simple)"
 echo "   - assets/images/ (all PNG variants)"
 echo "   - assets/site.webmanifest"
 echo "   - assets/browserconfig.xml"
