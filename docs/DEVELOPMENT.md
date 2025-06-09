@@ -174,7 +174,7 @@ Site header with:
 ### Creating New Components
 1. Add HTML to `_includes/` directory
 2. Style in appropriate SCSS file
-3. Include in layouts with `{% include component.html %}`
+3. Include in layouts with `{% raw %}{% include component.html %}{% endraw %}`
 
 ## 📝 Content Management
 

@@ -136,14 +136,24 @@ a {
   }
   
   // Clean post styling
+  .post-card-link {
+    &:hover {
+      transform: translateY(-2px);
+      
+      .post-item {
+        border-color: var(--text-accent);
+        box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+      }
+      
+      .post-title {
+        color: var(--text-accent);
+      }
+    }
+  }
+  
   .post-item {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    
-    &:hover {
-      border-color: var(--text-accent);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
   }
   
   // Remove phosphor glow effects

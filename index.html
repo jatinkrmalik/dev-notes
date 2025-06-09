@@ -4,7 +4,7 @@ layout: default
 
 <div class="welcome-section">
   <div class="intro-text">
-    Raw technical explorations from a Principal Engineer at Atlassian. Unpolished thoughts on distributed systems, cloud architecture, home lab experiments, and everything in between. This is where I document discoveries, failures, and random engineering insights.
+    Raw technical explorations from a life-long learner. Unpolished thoughts on distributed systems, cloud architecture, home lab experiments, and everything in between. This is where I document discoveries, failures, and random engineering insights.
   </div>
   
   <div class="quick-stats">
@@ -21,29 +21,29 @@ layout: default
   
   <div class="post-list">
     {% for post in site.posts limit:5 %}
-    <article class="post-item">
-      <h3 class="post-title">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h3>
-      
-      <div class="post-meta">
-        <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-        <span class="meta-separator"> • </span>
-        <span class="read-time">{{ post.content | number_of_words | divided_by: 200 }} min read</span>
-      </div>
-      
-      <div class="post-excerpt">
-        {{ post.excerpt | strip_html | truncatewords: 40 }}
-      </div>
-      
-      {% if post.tags %}
-      <div class="post-tags">
-        {% for tag in post.tags %}
-        <span class="tag">#{{ tag }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </article>
+    <a href="{{ post.url | relative_url }}" class="post-card-link">
+      <article class="post-item">
+        <h3 class="post-title">{{ post.title }}</h3>
+        
+        <div class="post-meta">
+          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+          <span class="meta-separator"> • </span>
+          <span class="read-time">{{ post.content | number_of_words | divided_by: 200 }} min read</span>
+        </div>
+        
+        <div class="post-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 40 }}
+        </div>
+        
+        {% if post.tags %}
+        <div class="post-tags">
+          {% for tag in post.tags %}
+          <span class="tag">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+    </a>
     {% endfor %}
   </div>
   
