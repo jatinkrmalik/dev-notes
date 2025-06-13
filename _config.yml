@@ -19,6 +19,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 # GitHub Pages safe gems
 safe: true
@@ -26,6 +27,7 @@ whitelist:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 # Sass configuration
 sass:
