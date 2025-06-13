@@ -6,7 +6,7 @@ description: >-
   Unpolished thoughts on distributed systems, cloud architecture, 
   home lab experiments, and everything in between.
 baseurl: ""
-url: "https://jatinkrmalik.github.io" # Change this to your GitHub Pages URL
+url: "https://dev.j47.in" # Your custom subdomain
 author: "@jatinkrmalik"
 
 # Build settings
